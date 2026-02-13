@@ -1,12 +1,12 @@
-'use client';
-
 import { useState } from 'react';
 import { Mail, Lock, Eye, EyeOff } from 'lucide-react';
 import { loginUser } from '../services/authService';
 import { useSnackbar } from 'notistack';
+import { useNavigate } from 'react-router-dom';
 
 export default function LoginPage() {
   const {enqueueSnackbar} = useSnackbar()
+  const navigate = useNavigate()
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -24,6 +24,7 @@ export default function LoginPage() {
     try {
       await loginUser(data)
       enqueueSnackbar('User logged in successfully', {variant:'success'})
+      navigate('/inventoryManagement')
     } catch (error) {
       enqueueSnackbar(error.message, {variant:'error'})
     } finally {
