@@ -2,22 +2,36 @@
 
 import { useState } from 'react';
 import { Mail, Lock, Eye, EyeOff } from 'lucide-react';
+import { loginUser } from '../services/authService';
+import { useSnackbar } from 'notistack';
 
 export default function LoginPage() {
+  const {enqueueSnackbar} = useSnackbar()
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    // Simulate login process
-    setTimeout(() => {
-      setIsLoading(false);
-      console.log('Login attempt with:', { email, password });
-    }, 1500);
+
+    const data = {
+      email, 
+      password
+    }
+
+    try {
+      await loginUser(data)
+      enqueueSnackbar('User logged in successfully', {variant:'success'})
+    } catch (error) {
+      enqueueSnackbar(error.message, {variant:'error'})
+    } finally {
+      setIsLoading(false)
+    }
   };
+
+
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center p-4 overflow-hidden">

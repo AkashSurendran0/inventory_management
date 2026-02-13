@@ -2,7 +2,7 @@ import axios from 'axios'
 
 const backendRoute=import.meta.env.VITE_BACKEND_ROUTE
 
-const api=axios.create({
+export const api=axios.create({
     baseURL: backendRoute,
     withCredentials: true
 })
@@ -40,7 +40,7 @@ api.interceptors.response.use(
 
         switch (status) {
             case 401:
-                window.location.href='/login'
+                console.error("Unauthorized")
                 break
             
             case 403:

@@ -1,14 +1,21 @@
 import {BrowserRouter, Route, Routes} from 'react-router-dom'
 import LoginPage from './pages/login'
+import {SnackbarProvider} from 'notistack'
 
 function App() {
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path='/login' element={<LoginPage/>}/>
-      </Routes>
-    </BrowserRouter>
+      <SnackbarProvider
+        maxSnack={3} 
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+        autoHideDuration={3000}
+      >
+        <BrowserRouter>
+          <Routes>
+            <Route path='/login' element={<LoginPage/>}/>
+          </Routes>
+        </BrowserRouter>
+      </SnackbarProvider>
   )
 
 }
