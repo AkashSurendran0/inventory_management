@@ -2,16 +2,20 @@
 
 import { useState } from 'react'
 import { Menu, X, LayoutDashboard, Package, Users, ShoppingCart, BarChart3, LogOut } from 'lucide-react'
+import { useLocation } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 export default function Sidebar() {
+  const location=useLocation()
+  const navigate=useNavigate()
   const [isOpen, setIsOpen] = useState(false)
 
   const menuItems = [
-    { icon: LayoutDashboard, label: 'Dashboard', href: '#' },
-    { icon: Package, label: 'Inventory', href: '#', active: true },
-    { icon: Users, label: 'Customers', href: '#' },
-    { icon: ShoppingCart, label: 'Sales', href: '#' },
-    { icon: BarChart3, label: 'Reports', href: '#' },
+    { icon: LayoutDashboard, label: 'Dashboard', href: '#', active:false  },
+    { icon: Package, label: 'Inventory', href: '/inventoryManagement', active: false },
+    { icon: Users, label: 'Customers', href: '/customerManagement', active:false },
+    { icon: ShoppingCart, label: 'Sales', href: '#', active:false },
+    { icon: BarChart3, label: 'Reports', href: '#', active:false },
   ]
 
   return (
@@ -48,18 +52,18 @@ export default function Sidebar() {
         {/* Navigation */}
         <nav className="flex-1 space-y-2">
           {menuItems.map((item) => (
-            <a
+            <p
               key={item.label}
-              href={item.href}
-              className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors duration-200 ${
-                item.active
+              onClick={()=>navigate(item.href)}
+              className={`cursor-pointer flex items-center gap-3 px-4 py-3 rounded-lg transition-colors duration-200 ${
+                location.pathname == item.href
                   ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white'
                   : 'text-slate-300 hover:bg-slate-800'
               }`}
             >
               <item.icon size={20} />
               <span className="font-medium">{item.label}</span>
-            </a>
+            </p>
           ))}
         </nav>
 
