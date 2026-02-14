@@ -2,8 +2,8 @@ import { api } from "../lib/api";
 
 const backendRoute=import.meta.env.VITE_BACKEND_ROUTE
 
-export const getAllProducts = async () => {
-    return await api.get(`${backendRoute}/v1/inventory/products`)
+export const getAllProducts = async (query) => {
+    return await api.get(`${backendRoute}/v1/inventory/products?query=${query}`)
 }
 
 export const addItem = async (data) => {
@@ -12,4 +12,8 @@ export const addItem = async (data) => {
 
 export const editItem = async (data, id) => {
     return await api.patch(`${backendRoute}/v1/inventory/products/${id}`, data)
+}
+
+export const deleteProduct = async (id) => {
+    return await api.delete(`${backendRoute}/v1/inventory/products/${id}`)
 }

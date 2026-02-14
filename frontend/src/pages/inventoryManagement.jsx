@@ -7,37 +7,35 @@ import AddItemModal from '../components/addItemModal'
 import DeleteModal from '../components/deleteModal'
 import InventoryTable from '../components/table/inventoryTable'
 import { useEffect } from 'react'
-import { addItem, editItem, getAllProducts } from '../services/inventoryService'
+import { addItem, deleteProduct, editItem, getAllProducts } from '../services/inventoryService'
 import { enqueueSnackbar } from 'notistack'
 import EditItemModal from '../components/editItemModal'
+import { useRef } from 'react'
 
-function InventoryManagement() {
-
-    
-    
+function InventoryManagement() {    
     const [items, setItems] = useState([])
-    
     const [searchQuery, setSearchQuery] = useState('')
     const [isAddModalOpen, setIsAddModalOpen] = useState(false)
     const [isEditModalOpen, setIsEditModalOpen] = useState(false)
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
     const [selectedItem, setSelectedItem] = useState(null)
     const [clearForm, setClearForm] = useState(false)
-    
-    // const filteredItems = items.filter(
-    //     (item) =>
-    //         item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    //     item.description.toLowerCase().includes(searchQuery.toLowerCase())
-    // )
+    const debouncer=useRef(null)
 
+    
     useEffect(() => {
         const fetchProducts = async () => {
-            const products=await getAllProducts()
+            const products=await getAllProducts(searchQuery)
             setItems(products.result)
         }
 
         fetchProducts()
     }, [])
+
+    const getQueriedProducts = async (query) => {
+        const products=await getAllProducts(query)
+        setItems(products.result)
+    }
     
     const handleAddItem = async (newItem) => {
         try {
@@ -70,8 +68,9 @@ function InventoryManagement() {
         setIsDeleteModalOpen(true)
     }
 
-    const handleConfirmDelete = () => {
-        setItems(items.filter((item) => item.id !== selectedItem.id))
+    const handleConfirmDelete = async (id) => {
+        await deleteProduct(id)
+        setItems(items.filter((item) => item._id !== id))
         setIsDeleteModalOpen(false)
         setSelectedItem(null)
     }
@@ -79,6 +78,14 @@ function InventoryManagement() {
     const openEditModal = (item) => {
         setSelectedItem(item)
         setIsEditModalOpen(true)
+    }
+
+    const searchProducts = async (query) => {
+        setSearchQuery(query) 
+        if(debouncer.current) clearTimeout(debouncer.current)
+        debouncer.current=setTimeout(() => {
+            getQueriedProducts(query)
+        }, 1000);  
     }
 
     return (
@@ -105,7 +112,7 @@ function InventoryManagement() {
                         type="text"
                         placeholder="Search by name or description"
                         value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
+                        onChange={(e) => searchProducts(e.target.value)}
                         className="w-full pl-10 pr-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:border-blue-500 transition-colors"
                         />
                     </div>
@@ -142,12 +149,14 @@ function InventoryManagement() {
                 />
             )}
 
-            <DeleteModal
-                isOpen={isDeleteModalOpen}
-                onClose={() => setIsDeleteModalOpen(false)}
-                onConfirm={handleConfirmDelete}
-                itemName={selectedItem?.name}
-            />
+            {selectedItem && (
+                <DeleteModal
+                    isOpen={isDeleteModalOpen}
+                    onClose={() => setIsDeleteModalOpen(false)}
+                    onConfirm={handleConfirmDelete}
+                    item={selectedItem}
+                />
+            )}
             </div>
         </div>
     )

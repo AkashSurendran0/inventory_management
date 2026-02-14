@@ -4,6 +4,15 @@ export const findProducts = async () => {
     return await InventoryModel.find()
 }
 
+export const findProductsByQuery = async (query) => {
+    return await InventoryModel.find({
+        $or:[
+            {normalizedName:{$regex:query, $options:'i'}},
+            {description:{$regex:query, $options:'i'}}
+        ]
+    })
+}
+
 export const insertProduct = async (data) => {
     let existingProduct=await InventoryModel.findOne({normalizedName:data.name.toLowerCase()})
     if(existingProduct) return {success:false}
@@ -37,4 +46,8 @@ export const editProduct = async (data, id) => {
         { new: true }
     )
     return {success:true, product}
+}
+
+export const deleteProduct = async (id) => {
+    return await InventoryModel.findByIdAndDelete(id)
 }
