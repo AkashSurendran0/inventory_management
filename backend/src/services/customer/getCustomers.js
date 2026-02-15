@@ -1,4 +1,4 @@
-import { getAllCustomers, getAllCustomersByQuery } from "../../repository/customer/customer.inventory.js"
+import { getAllCustomers, getAllCustomersByQuery } from "../../repository/customer.repository.js"
 
 export const getCustomers = async (query) => {
     if(query){

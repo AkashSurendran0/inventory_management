@@ -1,4 +1,4 @@
-import { editProduct } from "../../repository/inventory/inventory.repository.js"
+import { editProduct } from "../../repository/inventory.repository.js"
 
 export const changeProductDetails = async (data, id) => {
     const result=await editProduct(data, id)

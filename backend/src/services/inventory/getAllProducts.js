@@ -1,4 +1,4 @@
-import { findProducts, findProductsByQuery } from "../../repository/inventory/inventory.repository.js"
+import { findProducts, findProductsByQuery } from "../../repository/inventory.repository.js"
 
 export const getAllProducts = async (query) => {
     let products

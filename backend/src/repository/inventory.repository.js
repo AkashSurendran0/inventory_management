@@ -1,4 +1,4 @@
-import { InventoryModel } from "../../models/inventory.model.js";
+import { InventoryModel } from "../models/inventory.model.js";
 
 export const findProducts = async () => {
     return await InventoryModel.find()
@@ -50,4 +50,16 @@ export const editProduct = async (data, id) => {
 
 export const deleteProduct = async (id) => {
     return await InventoryModel.findByIdAndDelete(id)
+}
+
+export const decreaseQuantity = async (id, quantity) => {
+    const changedProduct=await InventoryModel.findByIdAndUpdate(
+        id,
+        {$inc:{
+            quantity:-quantity
+        }},
+        {new:true}
+    )
+
+    return changedProduct
 }

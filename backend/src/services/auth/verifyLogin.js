@@ -1,4 +1,4 @@
-import { findByEmail } from "../../repository/user/user.repository.js"
+import { findByEmail } from "../../repository/user.repository.js"
 import createError from "../../utils/errorHandler.util.js"
 import { STATUS_CODES } from "../../utils/statusCode.util.js"
 import { generateAccessToken, generateRefreshToken } from "../../utils/token.util.js"

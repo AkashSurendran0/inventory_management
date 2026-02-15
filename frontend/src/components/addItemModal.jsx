@@ -21,7 +21,7 @@ export default function AddItemModal({ isOpen, onClose, onSave }) {
     if(!formData.name) return enqueueSnackbar('Enter a product name', {variant:'error'})
     if(!formData.description) return enqueueSnackbar('Enter product description', {variant:'error'})
     if(!formData.quantity) return enqueueSnackbar('Enter a quantity', {variant:'error'})
-    if(formData.quantity < 1) return enqueueSnackbar('Enter a valid quantity', {variant:'error'})
+    if(formData.quantity < 1 || !Number.isInteger(Number(formData.quantity))) return enqueueSnackbar('Quantity must be greater that 0 and a whole number', {variant:'error'})
     if(!formData.price) return enqueueSnackbar('Enter a price', {variant:'error'})
     if(formData.price < 1) return enqueueSnackbar('Enter a valid price', {variant:'error'})
 

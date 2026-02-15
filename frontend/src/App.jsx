@@ -3,6 +3,7 @@ import LoginPage from './pages/login'
 import InventoryManagement from './pages/inventoryManagement'
 import {SnackbarProvider} from 'notistack'
 import CustomerPage from './pages/userManagement'
+import SalesPage from './pages/sales'
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
             <Route path='/login' element={<LoginPage/>}/>
             <Route path='/inventoryManagement' element={<InventoryManagement/>}/>
             <Route path='/customerManagement' element={<CustomerPage/>}/>
+            <Route path='/sales' element={<SalesPage/>}/>
           </Routes>
         </BrowserRouter>
       </SnackbarProvider>

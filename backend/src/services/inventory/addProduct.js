@@ -1,4 +1,4 @@
-import { insertProduct } from "../../repository/inventory/inventory.repository.js"
+import { insertProduct } from "../../repository/inventory.repository.js"
 import createError from "../../utils/errorHandler.util.js"
 import { STATUS_CODES } from "../../utils/statusCode.util.js"
 

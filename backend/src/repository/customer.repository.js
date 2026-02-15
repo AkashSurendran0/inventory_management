@@ -1,4 +1,4 @@
-import { CustomerModel } from "../../models/customer.model.js"
+import { CustomerModel } from "../models/customer.model.js"
 
 export const addCustomer = async (data) => {
     const existingCustomer = await CustomerModel.findOne({normalizedName:data.name.toLowerCase()})
