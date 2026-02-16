@@ -77,6 +77,7 @@ function AddSaleCard({onsuccess}) {
 
       enqueueSnackbar('Sale added successfully', {variant:'success'})
       onsuccess(result.result.sale)
+      setSelectedProduct(null)
       setFormData({
         product: "",
         quantity: "",
@@ -274,7 +275,8 @@ function AddSaleCard({onsuccess}) {
       {/* Action Buttons */}
       <div className="flex flex-col sm:flex-row gap-3">
         <button
-          onClick={() =>
+          onClick={() =>{
+            setSelectedProduct(null)
             setFormData({
               product: "",
               quantity: "",
@@ -282,7 +284,7 @@ function AddSaleCard({onsuccess}) {
               isCashSale: false,
               saleDate: new Date().toISOString().split("T")[0],
             })
-          }
+          }}
           className="flex-1 px-6 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded-lg transition-colors font-medium"
         >
           Cancel

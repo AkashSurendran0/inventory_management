@@ -1,6 +1,7 @@
 import { insertNewSale } from "../services/sales/addSale.js"
 import { querySales } from "../services/sales/querySales.js"
 import { removeSale } from "../services/sales/removeSale.js"
+import { sendReportEmail } from "../services/sales/sendReportEmail.js"
 import { STATUS_CODES } from "../utils/statusCode.util.js"
 
 export const addSale = async (req, res, next) => {
@@ -26,6 +27,16 @@ export const deleteSale = async (req, res, next) => {
     try {
         const {id}=req.params
         const result=await removeSale(id)
+        res.status(STATUS_CODES.OK).json({result})
+    } catch (error) {
+        next(error)
+    }
+}
+
+export const sendEmail = async (req, res, next) => {
+    try {
+        const {blob}=req.body
+        const result=await sendReportEmail(blob)
         res.status(STATUS_CODES.OK).json({result})
     } catch (error) {
         next(error)

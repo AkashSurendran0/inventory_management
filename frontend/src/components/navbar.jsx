@@ -2,7 +2,7 @@
 
 export default function Navbar({page}) {
   return (
-    <nav className="hidden md:block fixed top-0 left-64 right-0 h-16 bg-slate-800 border-b border-slate-700 z-30">
+    <nav className="hidden md:block fixed top-0 left-64 right-0 h-16 bg-slate-800 border-b border-slate-700 z-30 print:hidden">
       <div className="h-full flex items-center justify-between px-8">
         <div className="text-white font-semibold text-lg">{page}</div>
         <div className="flex items-center gap-4">

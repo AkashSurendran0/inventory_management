@@ -13,3 +13,7 @@ export const getSales = async () => {
 export const deleteSale = async (id) => {
     return await api.delete(`${backendRoute}/v1/sale/sales/${id}`)
 }
+
+export const sendEmail = async (blob) => {
+    return await api.post(`${backendRoute}/v1/sale/email`, {blob: blob})
+}

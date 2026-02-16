@@ -11,7 +11,6 @@ export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(false)
 
   const menuItems = [
-    { icon: LayoutDashboard, label: 'Dashboard', href: '#', active:false  },
     { icon: Package, label: 'Inventory', href: '/inventoryManagement', active: false },
     { icon: Users, label: 'Customers', href: '/customerManagement', active:false },
     { icon: ShoppingCart, label: 'Sales', href: '/sales', active:false },
@@ -19,7 +18,7 @@ export default function Sidebar() {
   ]
 
   return (
-    <>
+    <div className='print:hidden'>
       {/* Mobile menu button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
@@ -73,6 +72,6 @@ export default function Sidebar() {
           <span className="font-medium">Logout</span>
         </button>
       </aside>
-    </>
+    </div>
   )
 }

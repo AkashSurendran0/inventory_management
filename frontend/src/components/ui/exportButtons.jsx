@@ -3,9 +3,9 @@ import { Printer, Download, Mail } from 'lucide-react'
 
 function ExportButtons({handleExport}) {
   return (
-    <div className="flex flex-col sm:flex-row gap-3 mb-6">
+    <div className="flex flex-col sm:flex-row gap-3 mb-6 print:hidden">
       <button
-        onClick={() => handleExport("print")}
+        onClick={() => window.print()}
         className="flex items-center gap-2 px-4 py-2 bg-slate-800 text-slate-300 rounded-lg hover:bg-slate-700 transition-colors duration-200"
       >
         <Printer size={18} />
