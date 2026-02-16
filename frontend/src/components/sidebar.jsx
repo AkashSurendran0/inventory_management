@@ -15,7 +15,7 @@ export default function Sidebar() {
     { icon: Package, label: 'Inventory', href: '/inventoryManagement', active: false },
     { icon: Users, label: 'Customers', href: '/customerManagement', active:false },
     { icon: ShoppingCart, label: 'Sales', href: '/sales', active:false },
-    { icon: BarChart3, label: 'Reports', href: '#', active:false },
+    { icon: BarChart3, label: 'Reports', href: '/reports', active:false },
   ]
 
   return (

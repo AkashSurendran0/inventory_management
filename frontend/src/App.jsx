@@ -4,6 +4,7 @@ import InventoryManagement from './pages/inventoryManagement'
 import {SnackbarProvider} from 'notistack'
 import CustomerPage from './pages/userManagement'
 import SalesPage from './pages/sales'
+import ReportsPage from './pages/reports'
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
             <Route path='/inventoryManagement' element={<InventoryManagement/>}/>
             <Route path='/customerManagement' element={<CustomerPage/>}/>
             <Route path='/sales' element={<SalesPage/>}/>
+            <Route path='/reports' element={<ReportsPage/>}/>
           </Routes>
         </BrowserRouter>
       </SnackbarProvider>

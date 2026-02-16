@@ -20,7 +20,7 @@ export default function DeleteModal({ isOpen, onClose, onConfirm, item }) {
                 Delete Item
             </h2>
             <p className="text-slate-400 text-center mb-6">
-                Are you sure you want to delete <span className="font-semibold text-white">"{item.name}"</span>? This action cannot be undone.
+                Are you sure you want to delete <span className="font-semibold text-white">"{item.name ?? `Sale - ${item.productName}`}"</span>? This action cannot be undone.
             </p>
 
             {/* Buttons */}

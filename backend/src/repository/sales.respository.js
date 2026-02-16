@@ -16,3 +16,7 @@ export const addSale = async (data) => {
 export const getAllSales = async () => {
     return await SalesModel.find()
 }
+
+export const deleteSale = async (id) => {
+    return await SalesModel.findByIdAndDelete(id)
+}

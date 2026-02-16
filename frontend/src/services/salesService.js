@@ -9,3 +9,7 @@ export const addNewSale = async (data) => {
 export const getSales = async () => {
     return await api.get(`${backendRoute}/v1/sale/sales`)
 }
+
+export const deleteSale = async (id) => {
+    return await api.delete(`${backendRoute}/v1/sale/sales/${id}`)
+}
