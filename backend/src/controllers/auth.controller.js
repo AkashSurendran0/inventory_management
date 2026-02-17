@@ -22,3 +22,21 @@ export const LoginUser = async (req, res, next) => {
         next(error)
     }
 }
+
+export const VerifyMe = async (req, res, next) => {
+    try {
+        res.status(STATUS_CODES.OK).json({success:true})
+    } catch (error) {
+        next(error)
+    }
+}
+
+export const LogoutUser = async (req, res, next) => {
+    try {
+        res.clearCookie('token')
+        res.clearCookie('refreshToken')
+        res.status(STATUS_CODES.OK).json({success:true})
+    } catch (error) {
+        next(error)
+    }
+}

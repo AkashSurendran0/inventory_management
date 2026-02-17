@@ -5,6 +5,7 @@ import {SnackbarProvider} from 'notistack'
 import CustomerPage from './pages/userManagement'
 import SalesPage from './pages/sales'
 import ReportsPage from './pages/reports'
+import AuthGuard from './middleware/authGuard'
 
 function App() {
 
@@ -16,11 +17,36 @@ function App() {
       >
         <BrowserRouter>
           <Routes>
-            <Route path='/login' element={<LoginPage/>}/>
-            <Route path='/inventoryManagement' element={<InventoryManagement/>}/>
-            <Route path='/customerManagement' element={<CustomerPage/>}/>
-            <Route path='/sales' element={<SalesPage/>}/>
-            <Route path='/reports' element={<ReportsPage/>}/>
+            <Route path='/login' 
+            element={
+              <AuthGuard type="public">
+                <LoginPage/>
+              </AuthGuard>
+            }/>
+            <Route path='/inventoryManagement' 
+            element={
+              <AuthGuard type="protected">
+                <InventoryManagement/>
+              </AuthGuard>
+            }/>
+            <Route path='/customerManagement' 
+            element={
+              <AuthGuard type="protected">
+                <CustomerPage/>
+              </AuthGuard>
+            }/>
+            <Route path='/sales' 
+            element={
+              <AuthGuard type="protected">
+                <SalesPage/>
+              </AuthGuard>
+            }/>
+            <Route path='/reports' 
+            element={
+              <AuthGuard type="protected">
+                <ReportsPage/>
+              </AuthGuard>
+            }/>
           </Routes>
         </BrowserRouter>
       </SnackbarProvider>

@@ -4,11 +4,14 @@ import { useState } from 'react'
 import { Menu, X, LayoutDashboard, Package, Users, ShoppingCart, BarChart3, LogOut } from 'lucide-react'
 import { useLocation } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
+import { logoutUser } from '../services/authService'
+import { useAuth } from '../hooks/useAuth'
 
 export default function Sidebar() {
   const location=useLocation()
   const navigate=useNavigate()
   const [isOpen, setIsOpen] = useState(false)
+  const {setIsAuth}=useAuth()
 
   const menuItems = [
     { icon: Package, label: 'Inventory', href: '/inventoryManagement', active: false },
@@ -16,6 +19,12 @@ export default function Sidebar() {
     { icon: ShoppingCart, label: 'Sales', href: '/sales', active:false },
     { icon: BarChart3, label: 'Reports', href: '/reports', active:false },
   ]
+
+  const logout = async () => {
+    await logoutUser()
+    setIsAuth(false)
+    navigate('/login')
+  }
 
   return (
     <div className='print:hidden'>
@@ -67,7 +76,10 @@ export default function Sidebar() {
         </nav>
 
         {/* Logout */}
-        <button className="flex items-center gap-3 w-full px-4 py-3 rounded-lg text-slate-300 hover:bg-slate-800 transition-colors duration-200">
+        <button 
+        className="flex items-center gap-3 w-full px-4 py-3 rounded-lg text-slate-300 hover:bg-slate-800 transition-colors duration-200"
+        onClick={logout}
+        >
           <LogOut size={20} />
           <span className="font-medium">Logout</span>
         </button>
