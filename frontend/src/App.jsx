@@ -6,6 +6,7 @@ import CustomerPage from './pages/userManagement'
 import SalesPage from './pages/sales'
 import ReportsPage from './pages/reports'
 import AuthGuard from './middleware/authGuard'
+import { Navigate } from "react-router-dom"
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
       >
         <BrowserRouter>
           <Routes>
+            <Route path="/" element={<Navigate to="/login" replace />} />
             <Route path='/login' 
             element={
               <AuthGuard type="public">
