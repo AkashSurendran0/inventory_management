@@ -7,15 +7,13 @@ export const LoginUser = async (req, res, next) => {
         const result=await verifyLogin(email, password)
         res.cookie("token", result.accessToken, {
             httpOnly: true,
-            secure: false,
-            sameSite: "lax",
-            path: "/",
+            secure: true,
+            sameSite: "none",
         })
         res.cookie("refreshToken", result.refreshToken, {
             httpOnly: true,
-            secure: false,
-            sameSite: "lax",
-            path: "/",
+            secure: true,
+            sameSite: "none",
         })
         res.status(STATUS_CODES.OK).json({success:true})
     } catch (error) {
